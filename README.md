@@ -18,4 +18,15 @@ This project is a simple terminal-based application that reads and decodes Wi-Fi
    ```bash
    git clone https://github.com/your-username/qr-code-wifi-reader.git
    cd qr-code-wifi-reader
+```
 
+## Install module:
+```bash
+pip install -r requirements.txt
+```
+## jalankan program:
+```bash
+python main.py
+```
+
+## Ojok Lali cek Channel ku yi!!!.
