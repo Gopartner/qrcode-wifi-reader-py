@@ -1,0 +1,11 @@
+# Abaikan semua isi folder image, kecuali .gitkeep
+
+# Mengabaikan semua file dan subfolder di dalam folder image/
+image/*
+
+# Kecualikan file .gitkeep agar tetap dilacak di repository
+!image/.gitkeep
+
+# ========batas
+
+
