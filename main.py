@@ -3,6 +3,7 @@ from pyzbar.pyzbar import decode
 from PIL import Image
 from colorama import Fore, Back, Style, init
 from urllib.parse import unquote
+import cairosvg  # Tambahkan library CairoSVG untuk menangani file SVG
 
 # Initialize Colorama
 init()
@@ -23,8 +24,18 @@ try:
     choice = int(input("Enter the number of the image you want to select: "))
     if 0 <= choice < len(files):
         image_path = os.path.join(image_dir, files[choice])
-        image = Image.open(image_path)
-        print(f"Image '{files[choice]}' selected and opened.")
+        
+        # Check if the file is SVG and convert it to PNG
+        if image_path.endswith('.svg'):
+            print(f"Converting '{files[choice]}' (SVG) to PNG...")
+            png_path = image_path.replace('.svg', '.png')
+            cairosvg.svg2png(url=image_path, write_to=png_path)
+            image = Image.open(png_path)  # Open the converted PNG
+            print(f"Image '{files[choice]}' has been converted and opened as PNG.")
+        else:
+            # Open the image directly if not an SVG
+            image = Image.open(image_path)
+            print(f"Image '{files[choice]}' selected and opened.")
     else:
         print("Invalid choice. Please enter a valid number.")
         exit()
@@ -51,7 +62,7 @@ if decoded_objects:
             output_data = cleaned_data
         else:
             output_data = data
-        
+
         # Print formatted output for each QR code found
         print(Fore.GREEN + Back.BLACK + Style.BRIGHT + f"\nQR Code Data: {output_data}" + Style.RESET_ALL)
 else:
